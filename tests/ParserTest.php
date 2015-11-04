@@ -58,7 +58,7 @@ class ParserTest extends PHPUnit_Framework_TestCase
   }
 
   /**
-   * Tests the parseArgv method.
+   * Tests the PhpCli\Parser::parseArgv method.
    *
    * @param array $expected What the pasred Argv values should be.
    * @param array $argv The raw argv values.
@@ -76,20 +76,77 @@ class ParserTest extends PHPUnit_Framework_TestCase
 
     $this->assertEquals($sut, $result);
 
-    $reflection_property = $reflection->getProperty('argv');
+    $reflection_property = $reflection->getProperty('parsedArgs');
     $reflection_property->setAccessible(true);
     $this->assertEquals($expected, $reflection_property->getValue($sut));
   }
 
+  /**
+   * Tests the PhpCli\Parser::getArgs method.
+   */
+  public function testGetArgs()
+  {
+    $args = array(
+      'key1' => 'value1',
+      'key2' => 'value2',
+    );
+
+    $sut = new PhpCli\Parser($args, 2);
+
+    $reflection = new ReflectionClass('PhpCli\\Parser');
+    $reflection_property = $reflection->getProperty('parsedArgs');
+    $reflection_property->setAccessible(true);
+    $reflection_property->setValue($sut, $args);
+
+    $result = $sut->getArgs();
+
+    $this->assertEquals($args, $result);
+  }
+
+  /**
+   * Tests the PhpCli\Parser::getArg method.
+   *
+   * @param string $expected The value of the argument that is expected.
+   * @param string $name The name of the argument to get.
+   * @param array $args The value of the parsedArgs.
+   * @param boolean $exception If an exception should be expected.
+   *
+   * @dataProvider dataGetArg
+   */
+  public function testGetArg($expected, $name, $args = array(), $exception = false)
+  {
+    $sut = new PhpCli\Parser($args, count($args));
+
+    $reflection = new ReflectionClass('PhpCli\\Parser');
+    $reflection_property = $reflection->getProperty('parsedArgs');
+    $reflection_property->setAccessible(true);
+    $reflection_property->setValue($sut, $args);
+
+    if ($exception) {
+      $this->setExpectedException('PhpCli\Exception');
+    }
+
+    $result = $sut->getArg($name);
+    $this->assertEquals($expected, $result);
+
+  }
+
+  /**
+   * Data provider for testParseArgv.
+   *
+   * @return array An array of data to use for testing.
+   */
   public function dataParseArgv()
   {
     return array(
 
+      // empty argv, empty expectations
       'empty argv, empty expectations' => array(
         'expected' => array(),
         'argv' => array(),
       ),
 
+      // simple argv, simple expectations
       'simple argv, simple expectations' => array(
         'expected' => array(
           'key' => 'value'
@@ -99,6 +156,48 @@ class ParserTest extends PHPUnit_Framework_TestCase
         ),
       ),
 
+      // argv with dashes, filtered expectations
+      'argv with dashes, filtered expectations' => array(
+        'expected' => array(
+          'key' => 'value',
+          'key2' => 'value 2',
+        ),
+        'argv' => array(
+          'key=value',
+          '--key2=value 2'
+        ),
+      ),
+
     );
   }
+
+  /**
+   * Data provider for testGetArg.
+   *
+   * @return array An array of data to use for testing.
+   */
+  public function dataGetArg()
+  {
+    return array(
+
+      // expect value, has named arg
+      'expect value, has named arg' => array(
+        'expected' => 'expected',
+        'name'     => 'name',
+        'args'     => array(
+          'name' => 'expected',
+        ),
+      ),
+
+      // expect value, has named arg
+      'expect exception, has no named arg' => array(
+        'expected' => 'expected',
+        'name'     => 'name',
+        'args'     => array(),
+        'exception' => true,
+      ),
+
+    );
+  }
+
 }
