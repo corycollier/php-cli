@@ -15,6 +15,7 @@
   stopOnError="false"
   stopOnFailure="false"
   stopOnIncomplete="false"
+  bootstrap="../tests/bootstrap.php"
   stopOnSkipped="false"
   stopOnRisky="false"
   testSuiteLoaderClass="PHPUnit_Runner_StandardTestSuiteLoader"
