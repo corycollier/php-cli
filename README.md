@@ -12,6 +12,6 @@ print_r($parser->getArgs());
 ```
 
 From the command line, arguments can be passed in like this:
-```bash
+```Shell
 php script.php --arg=value arg2=value2
 ```
