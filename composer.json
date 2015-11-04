@@ -20,5 +20,8 @@
     },
     "require": {
         "theseer/phpdox": "dev-master"
+    },
+    "autoload": {
+        "psr-4": { "PhpCli\\": "src/" }
     }
 }
