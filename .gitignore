@@ -1,7 +1,12 @@
-composer.phar
-composer.lock
-vendor/
+# folders
+/vendor/
+build/*
 
-# Commit your application's lock file http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file
-# You may choose to ignore a library lock file http://getcomposer.org/doc/02-libraries.md#lock-file
-# composer.lock
+# keep the config files in the build folder
+!build/*.xml
+
+# files
+.DS_Store
+cache.properties
+composer.lock
+
