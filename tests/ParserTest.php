@@ -128,7 +128,6 @@ class ParserTest extends PHPUnit_Framework_TestCase
 
     $result = $sut->getArg($name);
     $this->assertEquals($expected, $result);
-
   }
 
   /**
