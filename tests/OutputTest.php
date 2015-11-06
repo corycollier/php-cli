@@ -14,7 +14,7 @@ class OutputTest extends PHPUnit_Framework_TestCase
      */
     public function testWrite($message, $params = array())
     {
-        $sut = $this->getMockBuilder('PhpCli\Output')
+        $sut = $this->getMockBuilder('PhpCli\\Output')
             ->disableOriginalConstructor()
             ->setMethods(array(
                 'getMergedWriteParams',
@@ -57,7 +57,7 @@ class OutputTest extends PHPUnit_Framework_TestCase
     {
         $sut = new PhpCli\Output;
 
-        $reflection = new ReflectionClass("PhpCli\Output");
+        $reflection = new ReflectionClass("PhpCli\\Output");
 
         $reflection_method = $reflection->getMethod('getMergedWriteParams');
         $reflection_method->setAccessible(true);
@@ -79,7 +79,7 @@ class OutputTest extends PHPUnit_Framework_TestCase
     {
         $sut = new PhpCli\Output;
 
-        $reflection = new ReflectionClass("PhpCli\Output");
+        $reflection = new ReflectionClass("PhpCli\\Output");
 
         $reflection_method = $reflection->getMethod('getDecoratedMessage');
         $reflection_method->setAccessible(true);
@@ -100,7 +100,7 @@ class OutputTest extends PHPUnit_Framework_TestCase
     {
         $sut = new PhpCli\Output;
 
-        $reflection = new ReflectionClass("PhpCli\Output");
+        $reflection = new ReflectionClass("PhpCli\\Output");
 
         $reflection_method = $reflection->getMethod('getMessagePrefix');
         $reflection_method->setAccessible(true);
