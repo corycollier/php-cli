@@ -14,8 +14,7 @@ class OutputTest extends PHPUnit_Framework_TestCase
      */
     public function testWrite($message, $params = array())
     {
-        $sut = $this->getMockBuilder('PhpCli\\Output')
-            ->disableOriginalConstructor()
+        $sut = $this->getMockBuilder('PhpCli\Output')
             ->setMethods(array(
                 'getMergedWriteParams',
                 'getMessagePrefix',

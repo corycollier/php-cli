@@ -1,15 +1,21 @@
 {
     "name"        : "corycollier/php-cli",
+
     "description" : "Parses cli arguments into array data for php use",
+
     "license"     : "MIT",
+
     "authors"     : [
         {
             "name"  : "Cory Collier",
             "email" : "corycollier@corycollier.com"
         }
     ],
+
     "minimum-stability" : "dev",
+
     "prefer-stable"     : true,
+
     "require-dev"           : {
         "phploc/phploc"             : "^3.0@dev",
         "pdepend/pdepend"           : "~2.0",
@@ -18,9 +24,11 @@
         "sebastian/phpcpd"          : "^2.0@dev",
         "phpunit/phpunit"           : "~5.0"
     },
+
     "require": {
         "theseer/phpdox": "dev-master"
     },
+
     "autoload": {
         "psr-4": { "PhpCli\\": "src/" }
     }
