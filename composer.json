@@ -23,10 +23,10 @@
         "squizlabs/php_codesniffer" : "^2.0@dev",
         "sebastian/phpcpd"          : "^2.0@dev",
         "phpunit/phpunit"           : "~5.0"
+        "theseer/phpdox"            : "0.8.1.1",
     },
 
     "require": {
-        "theseer/phpdox": "dev-master"
     },
 
     "autoload": {
