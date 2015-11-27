@@ -1,8 +1,10 @@
 <?php
 
+namespace PhpCli;
+
 use PhpCli\Output;
 
-class OutputTest extends PHPUnit_Framework_TestCase
+class OutputTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Tests the write method.
@@ -14,7 +16,7 @@ class OutputTest extends PHPUnit_Framework_TestCase
      */
     public function testWrite($message, $params = array())
     {
-        $sut = $this->getMockBuilder('PhpCli\Output')
+        $sut = $this->getMockBuilder('\PhpCli\Output')
             ->setMethods(array(
                 'getMergedWriteParams',
                 'getMessagePrefix',
@@ -52,11 +54,11 @@ class OutputTest extends PHPUnit_Framework_TestCase
      *
      * @dataProvider dataGetMergedWriteParams
      */
-    public function testGetMergedWriteParams ($expected, $params)
+    public function testGetMergedWriteParams($expected, $params)
     {
-        $sut = new PhpCli\Output;
+        $sut = new Output;
 
-        $reflection = new ReflectionClass("PhpCli\\Output");
+        $reflection = new \ReflectionClass('\PhpCli\Output');
 
         $reflection_method = $reflection->getMethod('getMergedWriteParams');
         $reflection_method->setAccessible(true);
@@ -76,9 +78,9 @@ class OutputTest extends PHPUnit_Framework_TestCase
      */
     public function testGetDecoratedMessage($expected, $message, $params = array())
     {
-        $sut = new PhpCli\Output;
+        $sut = new \PhpCli\Output;
 
-        $reflection = new ReflectionClass("PhpCli\\Output");
+        $reflection = new \ReflectionClass('\PhpCli\Output');
 
         $reflection_method = $reflection->getMethod('getDecoratedMessage');
         $reflection_method->setAccessible(true);
@@ -97,9 +99,9 @@ class OutputTest extends PHPUnit_Framework_TestCase
      */
     public function testGetMessagePrefix($expected, $params = array())
     {
-        $sut = new PhpCli\Output;
+        $sut = new Output;
 
-        $reflection = new ReflectionClass("PhpCli\\Output");
+        $reflection = new \ReflectionClass('\PhpCli\Output');
 
         $reflection_method = $reflection->getMethod('getMessagePrefix');
         $reflection_method->setAccessible(true);
@@ -114,7 +116,7 @@ class OutputTest extends PHPUnit_Framework_TestCase
     public function testGetReset()
     {
         $expected = '\e[0m';
-        $sut      = new PhpCli\Output;
+        $sut      = new Output;
         $result = $sut->getReset();
 
         $this->assertEquals($expected, $result);

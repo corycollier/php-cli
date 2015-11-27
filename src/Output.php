@@ -57,7 +57,7 @@ class Output
      *
      * @return \PhpCli\Output Return $this for object-chaining.
      */
-    public function write ($message, array $params = array())
+    public function write($message, array $params = array())
     {
         $options = $this->getMergedWriteParams($params);
 
@@ -95,7 +95,7 @@ class Output
      *
      * @return string The decorated message.
      */
-    protected function getDecoratedMessage ($message, array $params = array())
+    protected function getDecoratedMessage($message, array $params = array())
     {
         $result = '';
         $prefix = '';
@@ -139,5 +139,4 @@ class Output
     {
         return '\e[0m';
     }
-
 }

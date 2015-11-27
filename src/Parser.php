@@ -1,14 +1,32 @@
 <?php
+/**
+ * The Parser class for the PhpCli package
+ *
+ * @category  PHP
+ * @package   PhpCli
+ * @author    Cory Collier <corycollier@corycollier.com>
+ * @license   https://github.com/corycollier/php-cli/blob/master/LICENSE
+ * @link      https://github.com/corycollier/php-cli
+ */
 
 namespace PhpCli;
 
+/**
+ * Class to handle parsing cli arguments
+ *
+ * @category  PHP
+ * @package   PhpCli
+ * @author    Cory Collier <corycollier@corycollier.com>
+ * @license   https://github.com/corycollier/php-cli/blob/master/LICENSE
+ * @link      https://github.com/corycollier/php-cli
+ */
 class Parser
 {
     const ERR_NO_ARG_BY_NAME = 'No argument exists with the provided name';
 
     protected $argv = array();
-    protected $argc = 0;
     protected $parsedArgs = array();
+    protected $supportedArgs = array();
 
     /**
      * Constructor.
@@ -16,10 +34,10 @@ class Parser
      * @param array $argv The value for $argv.
      * @param integer $argc The value for $argc.
      */
-    public function __construct(array $argv = array(), $argc = 0)
+    public function __construct(array $argv = array(), array $supported = array())
     {
         $this->argv = $argv;
-        $this->argc = $argc;
+        $this->supportedArgs = $supported;
 
         $this->init();
     }
@@ -31,6 +49,7 @@ class Parser
      */
     public function init()
     {
+        $this->setupSupportedArgs($this->supportedArgs);
         $this->parseArgv($this->argv);
         return $this;
     }
@@ -54,7 +73,10 @@ class Parser
                 '-' => ''
             ));
 
-            $this->parsedArgs[$key] = $value;
+            if (array_key_exists($key, $this->supportedArgs)) {
+                $this->parsedArgs[$key] = $value;
+            }
+
         }
 
         return $this;
@@ -77,12 +99,32 @@ class Parser
      *
      * @return string The value of the argument.
      */
-    public function getArg ($name = '')
+    public function getArg($name = '')
     {
         if (!isset($this->parsedArgs[$name])) {
             throw new \PhpCli\Exception(self::ERR_NO_ARG_BY_NAME);
         }
 
         return $this->parsedArgs[$name];
+    }
+
+    /**
+     * Takes the supported arguments, and does some setup on them
+     *
+     * @param array $arguments The list of args/descriptions that are supported.
+     *
+     * @return PhpCli\Parser Returns $this, for object-chaining.
+     */
+    public function setupSupportedArgs($arguments = array())
+    {
+        $defaults = array(
+            'help' => 'The help menu',
+        );
+
+        $arguments = array_merge($defaults, $arguments);
+
+        $this->supportedArgs = $arguments;
+
+        return $this;
     }
 }
