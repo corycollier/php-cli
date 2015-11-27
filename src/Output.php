@@ -69,6 +69,17 @@ class Output
     }
 
     /**
+     * Writes a newline character.
+     *
+     * @return \PhpCli\Output Return $this, for object-chaining.
+     */
+    public function newline()
+    {
+        echo PHP_EOL;
+        return $this;
+    }
+
+    /**
      * Gets merged params with defaults
      *
      * @param array $params An array of parameters to merge with.
