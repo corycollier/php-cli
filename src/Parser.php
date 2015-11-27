@@ -127,4 +127,32 @@ class Parser
 
         return $this;
     }
+
+    /**
+     * Outputs the help menu.
+     *
+     * @return PhpCli\Parser Returns $this, for object-chaining.
+     */
+    public function help()
+    {
+        $output = new Output;
+        $maxlen = 0;
+        foreach ($this->supportedArgs as $key => $description) {
+            $len = strlen($key);
+            if ($len > $maxlen) {
+                $maxlen = $len;
+            }
+        }
+
+        foreach ($this->supportedArgs as $key => $description) {
+            $len = strlen($key);
+            $output->write($key, array('bold' => true,))
+                ->write(str_repeat(' ', $maxlen - $len))
+                ->write(' - ')
+                ->write($description);
+
+            echo PHP_EOL;
+        }
+
+    }
 }

@@ -115,7 +115,7 @@ class OutputTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetReset()
     {
-        $expected = '\e[0m';
+        $expected = "\033[0m";
         $sut      = new Output;
         $result = $sut->getReset();
 
@@ -345,7 +345,7 @@ class OutputTest extends \PHPUnit_Framework_TestCase
             ),
             // expect null, empty params
             'expect prefix, NOT empty params' => array(
-                'expected' => '\e[',
+                'expected' => "\033[",
                 'params' => array(
                     'key' => 'value',
                 ),

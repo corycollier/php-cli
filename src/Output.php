@@ -125,7 +125,7 @@ class Output
     {
         foreach ($params as $option => $value) {
             if ($value) {
-                return '\e[';
+                return "\033[";
             }
         }
     }
@@ -137,6 +137,6 @@ class Output
      */
     public function getReset()
     {
-        return '\e[0m';
+        return "\033[0m";
     }
 }
