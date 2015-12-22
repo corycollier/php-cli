@@ -2,6 +2,7 @@
 Cli Tools for PHP
 
 [![Build Status](https://travis-ci.org/corycollier/php-cli.svg?branch=master)](https://travis-ci.org/corycollier/php-cli)
+[![Coverage Status](https://coveralls.io/repos/corycollier/php-cli/badge.svg?branch=master&service=github)](https://coveralls.io/github/corycollier/php-cli?branch=master)
 
 ## Parser Usage
 Using the Parser can be done like this:

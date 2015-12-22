@@ -11,11 +11,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructor()
     {
-        $argv = array(
-            'path/to/file',
-            'asdf=asdf',
-            '--qwer=qwer'
-        );
+        $argv = ['path/to/file', 'asdf=asdf', '--qwer=qwer'];
 
         $sut = new Parser($argv);
 
@@ -28,15 +24,11 @@ class ParserTest extends \PHPUnit_Framework_TestCase
 
     public function testInit()
     {
-        $argv = array(
-            'path/to/file',
-            'asdf=asdf',
-            '--qwer=qwer'
-        );
+        $argv = ['path/to/file', 'asdf=asdf', '--qwer=qwer'];
 
         $sut = $this->getMockBuilder('\PhpCli\Parser')
             ->disableOriginalConstructor()
-            ->setMethods(array('parseArgv'))
+            ->setMethods(['parseArgv'])
             ->getMock();
 
         $reflection = new \ReflectionClass('\PhpCli\Parser');
@@ -86,10 +78,10 @@ class ParserTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetArgs()
     {
-        $supported = $args = array(
+        $supported = $args = [
             'key1' => 'value1',
             'key2' => 'value2',
-        );
+        ];
 
         $sut = new Parser($args, $supported);
 
@@ -113,7 +105,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
      *
      * @dataProvider dataGetArg
      */
-    public function testGetArg($expected, $name, $args = array(), $exception = false)
+    public function testGetArg($expected, $name, $args = [], $exception = false)
     {
         $sut = new Parser($args);
 
@@ -137,45 +129,44 @@ class ParserTest extends \PHPUnit_Framework_TestCase
      */
     public function dataParseArgv()
     {
-        return array(
+        return [
 
             // empty argv, empty expectations
-            'empty argv, empty expectations' => array(
-                'expected'    => array(),
-                'argv'            => array(),
-                'supported' => array(),
-            ),
+            'empty argv, empty expectations' => [
+                'expected'  => [],
+                'argv'      => [],
+                'supported' => [],
+            ],
 
             // simple argv, simple expectations
-            'simple argv, simple expectations' => array(
-                'expected' => array(
+            'simple argv, simple expectations' => [
+                'expected' => [
                     'key' => 'value'
-                ),
-                'argv' => array(
+                ],
+                'argv' => [
                     'key=value',
-                ),
-                'supported' => array(
+                ],
+                'supported' => [
                     'key' => 'some description',
-                ),
-            ),
+                ]
+            ],
 
             // argv with dashes, filtered expectations
-            'argv with dashes, filtered expectations' => array(
-                'expected' => array(
+            'argv with dashes, filtered expectations' => [
+                'expected' => [
                     'key' => 'value',
                     'key2' => 'value 2',
-                ),
-                'argv' => array(
+                ],
+                'argv' => [
                     'key=value',
                     '--key2=value 2'
-                ),
-                'supported' => array(
+                ],
+                'supported' => [
                     'key' => 'some description',
                     'key2' => 'some other description',
-                ),
-            ),
-
-        );
+                ],
+            ],
+        ];
     }
 
     /**
@@ -185,25 +176,34 @@ class ParserTest extends \PHPUnit_Framework_TestCase
      */
     public function dataGetArg()
     {
-        return array(
-
+        return [
             // expect value, has named arg
-            'expect value, has named arg' => array(
+            'expect value, has named arg' => [
                 'expected' => 'expected',
-                'name'         => 'name',
-                'args'         => array(
+                'name'     => 'name',
+                'args'     => [
                     'name' => 'expected',
-                ),
-            ),
+                ],
+            ],
 
             // expect value, has named arg
-            'expect exception, has no named arg' => array(
-                'expected' => 'expected',
-                'name'         => 'name',
-                'args'         => array(),
+            'expect exception, has no named arg' => [
+                'expected'  => 'expected',
+                'name'      => 'name',
+                'args'      => [],
                 'exception' => true,
-            ),
+            ],
+        ];
+    }
 
-        );
+    /**
+     * Tests the PhpCli\Parser::help method
+     *
+     * @runInSeparateProcess
+     */
+    public function testHelp()
+    {
+        $sut = new \PhpCli\Parser;
+        $result = $sut->help();
     }
 }

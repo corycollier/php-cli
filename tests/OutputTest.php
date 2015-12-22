@@ -14,15 +14,15 @@ class OutputTest extends \PHPUnit_Framework_TestCase
      *
      * @dataProvider dataWrite
      */
-    public function testWrite($message, $params = array())
+    public function testWrite($message, $params = [])
     {
         $sut = $this->getMockBuilder('\PhpCli\Output')
-            ->setMethods(array(
+            ->setMethods([
                 'getMergedWriteParams',
                 'getMessagePrefix',
                 'getDecoratedMessage',
                 'getReset',
-            ))
+            ])
             ->getMock();
 
         $sut->expects($this->once())
@@ -76,7 +76,7 @@ class OutputTest extends \PHPUnit_Framework_TestCase
      *
      * @dataProvider dataGetDecoratedMessage
      */
-    public function testGetDecoratedMessage($expected, $message, $params = array())
+    public function testGetDecoratedMessage($expected, $message, $params = [])
     {
         $sut = new \PhpCli\Output;
 
@@ -97,7 +97,7 @@ class OutputTest extends \PHPUnit_Framework_TestCase
      *
      * @dataProvider dataGetMessagePrefix
      */
-    public function testGetMessagePrefix($expected, $params = array())
+    public function testGetMessagePrefix($expected, $params = [])
     {
         $sut = new Output;
 
@@ -129,15 +129,15 @@ class OutputTest extends \PHPUnit_Framework_TestCase
      */
     public function dataWrite()
     {
-        return array(
+        return [
 
             // simple message, simple params
-            'simple message, simple params' => array(
+            'simple message, simple params' => [
                 'message' => 'message',
-                'params'  => array(),
-            ),
+                'params'  => [],
+            ],
 
-        );
+        ];
     }
 
     /**
@@ -146,52 +146,52 @@ class OutputTest extends \PHPUnit_Framework_TestCase
      */
     public function dataGetMergedWriteParams()
     {
-        $defaults = array(
+        $defaults = [
             'background' => false,
             'color'      => false,
             'bold'       => false,
             'underline'  => false,
-        );
+        ];
 
-        return array(
+        return [
 
             // empty test
-            'empty test' => array(
-                'expected' => array_merge($defaults, array()),
-                'params'   => array(),
-            ),
+            'empty test' => [
+                'expected' => array_merge($defaults, []),
+                'params'   => [],
+            ],
 
             // backgroundtest
-            'has background' => array(
-                'expected' => array_merge($defaults, array(
+            'has background' => [
+                'expected' => array_merge($defaults, [
                     'background' => 'value',
-                )),
-                'params'   => array(
+                ]),
+                'params'   => [
                     'background' => 'value',
-                ),
-            ),
+                ],
+            ],
 
             // color test
-            'has color' => array(
-                'expected' => array_merge($defaults, array(
+            'has color' => [
+                'expected' => array_merge($defaults, [
                     'color' => 'value',
-                )),
-                'params'   => array(
+                ]),
+                'params'   => [
                     'color' => 'value',
-                ),
-            ),
+                ],
+            ],
 
             // color test
-            'is bold' => array(
-                'expected' => array_merge($defaults, array(
+            'is bold' => [
+                'expected' => array_merge($defaults, [
                     'bold' => true,
-                )),
-                'params'   => array(
+                ]),
+                'params'   => [
                     'bold' => true,
-                ),
-            ),
+                ],
+            ],
 
-        );
+        ];
     }
 
     /**
@@ -200,135 +200,134 @@ class OutputTest extends \PHPUnit_Framework_TestCase
      */
     public function dataGetDecoratedMessage()
     {
-        return array(
+        return [
             // simple test
-            'simple test' => array(
+            'simple test' => [
                 'expected' => 'message',
                 'message'  => 'message',
-                'params'   => array(),
-            ),
+                'params'   => [],
+            ],
             // red color
-            'red color' => array(
+            'red color' => [
                 'expected' => '31mmessage',
                 'message'  => 'message',
-                'params'   => array(
+                'params'   => [
                     'color' => 'red'
-                ),
-            ),
+                ],
+            ],
             // green color
-            'green color' => array(
+            'green color' => [
                 'expected' => '32mmessage',
                 'message'  => 'message',
-                'params'   => array(
+                'params'   => [
                     'color' => 'green'
-                ),
-            ),
+                ],
+            ],
             // yellow color
-            'yellow color' => array(
+            'yellow color' => [
                 'expected' => '33mmessage',
                 'message'  => 'message',
-                'params'   => array(
+                'params'   => [
                     'color' => 'yellow'
-                ),
-            ),
+                ],
+            ],
             // blue color
-            'blue color' => array(
+            'blue color' => [
                 'expected' => '34mmessage',
                 'message'  => 'message',
-                'params'   => array(
+                'params'   => [
                     'color' => 'blue'
-                ),
-            ),
+                ],
+            ],
             // magenta color
-            'magenta color' => array(
+            'magenta color' => [
                 'expected' => '35mmessage',
                 'message'  => 'message',
-                'params'   => array(
+                'params'   => [
                     'color' => 'magenta'
-                ),
-            ),
+                ],
+            ],
             // cyan color
-            'cyan color' => array(
+            'cyan color' => [
                 'expected' => '36mmessage',
                 'message'  => 'message',
-                'params'   => array(
+                'params'   => [
                     'color' => 'cyan'
-                ),
-            ),
+                ],
+            ],
             // light gray color
-            'light gray color' => array(
+            'light gray color' => [
                 'expected' => '37mmessage',
                 'message'  => 'message',
-                'params'   => array(
+                'params'   => [
                     'color' => 'light gray'
-                ),
-            ),
+                ],
+            ],
             // dark gray color
-            'dark gray color' => array(
+            'dark gray color' => [
                 'expected' => '90mmessage',
                 'message'  => 'message',
-                'params'   => array(
+                'params'   => [
                     'color' => 'dark gray'
-                ),
-            ),
+                ],
+            ],
             // light red color
-            'light red color' => array(
+            'light red color' => [
                 'expected' => '91mmessage',
                 'message'  => 'message',
-                'params'   => array(
+                'params'   => [
                     'color' => 'light red'
-                ),
-            ),
+                ],
+            ],
             // light green color
-            'light green color' => array(
+            'light green color' => [
                 'expected' => '92mmessage',
                 'message'  => 'message',
-                'params'   => array(
+                'params'   => [
                     'color' => 'light green'
-                ),
-            ),
+                ],
+            ],
             // light yellow color
-            'light yellow color' => array(
+            'light yellow color' => [
                 'expected' => '93mmessage',
                 'message'  => 'message',
-                'params'   => array(
+                'params'   => [
                     'color' => 'light yellow'
-                ),
-            ),
+                ],
+            ],
             // light blue color
-            'light blue color' => array(
+            'light blue color' => [
                 'expected' => '94mmessage',
                 'message'  => 'message',
-                'params'   => array(
+                'params'   => [
                     'color' => 'light blue'
-                ),
-            ),
+                ],
+            ],
             // light magenta color
-            'light magenta color' => array(
+            'light magenta color' => [
                 'expected' => '95mmessage',
                 'message'  => 'message',
-                'params'   => array(
+                'params'   => [
                     'color' => 'light magenta'
-                ),
-            ),
+                ],
+            ],
             // light cyan color
-            'light cyan color' => array(
+            'light cyan color' => [
                 'expected' => '96mmessage',
                 'message'  => 'message',
-                'params'   => array(
+                'params'   => [
                     'color' => 'light cyan'
-                ),
-            ),
+                ],
+            ],
             // white color
-            'white color' => array(
+            'white color' => [
                 'expected' => '97mmessage',
                 'message'  => 'message',
-                'params'   => array(
+                'params'   => [
                     'color' => 'white'
-                ),
-            ),
-
-        );
+                ],
+            ],
+        ];
     }
 
     /**
@@ -337,20 +336,21 @@ class OutputTest extends \PHPUnit_Framework_TestCase
      */
     public function dataGetMessagePrefix()
     {
-        return array(
+        return [
             // expect null, empty params
-            'expect null, empty params' => array(
+            'expect null, empty params' => [
                 'expected' => null,
-                'params' => array(),
-            ),
+                'params' => [],
+            ],
+
             // expect null, empty params
-            'expect prefix, NOT empty params' => array(
+            'expect prefix, NOT empty params' => [
                 'expected' => "\033[",
-                'params' => array(
+                'params' => [
                     'key' => 'value',
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
     }
 
     /**

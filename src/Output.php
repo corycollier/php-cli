@@ -4,8 +4,8 @@ namespace PhpCli;
 
 class Output
 {
-    protected $decorations = array(
-        'color' => array(
+    protected $decorations = [
+        'color' => [
             'black'         => '30',
             'red'           => '31',
             'green'         => '32',
@@ -22,8 +22,8 @@ class Output
             'light magenta' => '95',
             'light cyan'    => '96',
             'white'         => '97',
-        ),
-        'background' => array(
+        ],
+        'background' => [
             'black'         => '40',
             'red'           => '41',
             'green'         => '42',
@@ -40,14 +40,14 @@ class Output
             'light magenta' => '105',
             'light cyan'    => '106',
             'white'         => '107',
-        ),
-        'bold' => array(
+        ],
+        'bold' => [
             1 => '1'
-        ),
-        'underline' => array(
+        ],
+        'underline' => [
             1 => '4'
-        ),
-    );
+        ],
+    ];
 
     /**
      * writes a messge to the output
@@ -57,7 +57,7 @@ class Output
      *
      * @return \PhpCli\Output Return $this for object-chaining.
      */
-    public function write($message, array $params = array())
+    public function write($message, $params = [])
     {
         $options = $this->getMergedWriteParams($params);
 
@@ -86,14 +86,14 @@ class Output
      *
      * @return array An array of merged parameters.
      */
-    protected function getMergedWriteParams(array $params = array())
+    protected function getMergedWriteParams($params = [])
     {
-        $defaults = array(
+        $defaults = [
             'background' => false,
             'color'      => false,
             'bold'       => false,
             'underline'  => false,
-        );
+        ];
 
         return array_merge($defaults, $params);
     }
@@ -106,7 +106,7 @@ class Output
      *
      * @return string The decorated message.
      */
-    protected function getDecoratedMessage($message, array $params = array())
+    protected function getDecoratedMessage($message, $params = [])
     {
         $result = '';
         $prefix = '';
@@ -132,7 +132,7 @@ class Output
      *
      * @return string The resulting string to modify output (or not)
      */
-    protected function getMessagePrefix(array $params = array())
+    protected function getMessagePrefix($params = [])
     {
         foreach ($params as $option => $value) {
             if ($value) {
