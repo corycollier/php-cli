@@ -24,9 +24,9 @@ class Parser
 {
     const ERR_NO_ARG_BY_NAME = 'No argument exists with the provided name';
 
-    protected $argv = array();
-    protected $parsedArgs = array();
-    protected $supportedArgs = array();
+    protected $argv = [];
+    protected $parsedArgs = [];
+    protected $supportedArgs = [];
 
     /**
      * Constructor.
@@ -34,7 +34,7 @@ class Parser
      * @param array $argv The value for $argv.
      * @param integer $argc The value for $argc.
      */
-    public function __construct(array $argv = array(), array $supported = array())
+    public function __construct($argv = [], $supported = [])
     {
         $this->argv = $argv;
         $this->supportedArgs = $supported;
@@ -69,9 +69,9 @@ class Parser
                 continue;
             }
             $value = $parts[1];
-            $key   = strtr($parts[0], array(
+            $key   = strtr($parts[0], [
                 '-' => ''
-            ));
+            ]);
 
             if (array_key_exists($key, $this->supportedArgs)) {
                 $this->parsedArgs[$key] = $value;
@@ -115,11 +115,11 @@ class Parser
      *
      * @return PhpCli\Parser Returns $this, for object-chaining.
      */
-    public function setupSupportedArgs($arguments = array())
+    public function setupSupportedArgs($arguments = [])
     {
-        $defaults = array(
+        $defaults = [
             'help' => 'The help menu',
-        );
+        ];
 
         $arguments = array_merge($defaults, $arguments);
 
@@ -137,11 +137,11 @@ class Parser
     {
         echo PHP_EOL;
         $output = new Output;
-        $output->write('Available Commands', array(
+        $output->write('Available Commands', [
             'color'     => 'red',
             'bold'      => true,
             'underline' => true,
-        ));
+        ]);
         echo PHP_EOL;
 
         $maxlen = 0;
@@ -156,7 +156,7 @@ class Parser
         foreach ($this->supportedArgs as $key => $description) {
             $len = strlen($key);
             $output->write(' ')
-                ->write($key, array('color' => 'yellow'))
+                ->write($key, ['color' => 'yellow'])
                 ->write(str_repeat(' ', $maxlen - $len))
                 ->write(' - ')
                 ->write($description);
