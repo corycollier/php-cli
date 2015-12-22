@@ -4,6 +4,7 @@ php:
 
 before_script:
   ./composer.phar update
+
 script:
   ant full-build
 
