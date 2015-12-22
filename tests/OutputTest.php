@@ -352,4 +352,14 @@ class OutputTest extends \PHPUnit_Framework_TestCase
             ),
         );
     }
+
+    /**
+     * Tests the PhpCli\Output::newline method.
+     */
+    public function testNewline()
+    {
+        $sut = new \PhpCli\Output;
+        $result = $sut->newline();
+        $this->assertEquals($sut, $result);
+    }
 }
