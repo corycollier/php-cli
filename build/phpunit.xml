@@ -22,6 +22,7 @@
   timeoutForSmallTests="1"
   timeoutForMediumTests="10"
   timeoutForLargeTests="60"
+  beStrictAboutOutputDuringTests="false"
   verbose="true">
 
   <testsuites>
