@@ -8,7 +8,7 @@
 
     },
 
-    "authors"           : [
+    "authors" : [
         {
             "name"     : "Cory Collier",
             "email"    : "corycollier@corycollier.com",
@@ -17,7 +17,7 @@
         }
     ],
 
-    "require-dev"           : {
+    "require-dev" : {
         "phploc/phploc"             : "^3.0@dev",
         "pdepend/pdepend"           : "~2.0",
         "phpmd/phpmd"               : "dev-master",
