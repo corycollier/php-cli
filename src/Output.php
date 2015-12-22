@@ -57,7 +57,7 @@ class Output
      *
      * @return \PhpCli\Output Return $this for object-chaining.
      */
-    public function write ($message, array $params = array())
+    public function write($message, array $params = array())
     {
         $options = $this->getMergedWriteParams($params);
 
@@ -65,6 +65,17 @@ class Output
             , $this->getDecoratedMessage($message, $options)
             , $this->getReset();
 
+        return $this;
+    }
+
+    /**
+     * Writes a newline character.
+     *
+     * @return \PhpCli\Output Return $this, for object-chaining.
+     */
+    public function newline()
+    {
+        echo PHP_EOL;
         return $this;
     }
 
@@ -95,7 +106,7 @@ class Output
      *
      * @return string The decorated message.
      */
-    protected function getDecoratedMessage ($message, array $params = array())
+    protected function getDecoratedMessage($message, array $params = array())
     {
         $result = '';
         $prefix = '';
@@ -125,7 +136,7 @@ class Output
     {
         foreach ($params as $option => $value) {
             if ($value) {
-                return '\e[';
+                return "\033[";
             }
         }
     }
@@ -137,7 +148,6 @@ class Output
      */
     public function getReset()
     {
-        return '\e[0m';
+        return "\033[0m";
     }
-
 }

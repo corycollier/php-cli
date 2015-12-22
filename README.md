@@ -22,6 +22,6 @@ Using the output class can be done like this;
 use PhpCli\Output;
 $output = new PhpCli\Output;
 $output->write("hello world", array(
-  'color' -> 'red',
+  'color' => 'red',
 ));
 ```
